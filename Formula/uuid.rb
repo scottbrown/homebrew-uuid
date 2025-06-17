@@ -1,8 +1,14 @@
 # frozen_string_literal: true
 
-VERSION = '1.0.3'
+VERSION = '1.0.4'
 PACKAGE = 'uuid'
 REPO = "https://github.com/scottbrown/#{PACKAGE}"
+HASHES = {
+  'darwin/amd64': '77ff12e5a847398fead591ac14fd8c48818aa7aa04c9bb46223b56fdfe1f544e',
+  'darwin/arm64': '00e1ee9c8e6c6dafc38695f33c889da8fd6fe3b5577c5f866679befe579bad35',
+  'linux/amd64': '5c5c66fb8d1d15304cf06d72eb519cbba18bacd4dc06b470ecac9120cbef12e0',
+  'linux/arm64': '44ed3ea219cb3ed88390fd2c80d9407922d2b8f5224902f682c8c594ea21f3ef',
+}
 
 # Homebrew formula
 class Uuid < Formula
@@ -18,20 +24,20 @@ class Uuid < Formula
   on_macos do
     if Hardware::CPU.arm?
       url "#{prefix}-darwin-arm64.tar.gz"
-      sha256 '5338f58c3b432733c4289f9c361676b99b460b684edae37cfd21765627d667c7'
+      sha256 HASHES['darwin/arm64']
     else
       url "#{prefix}-darwin-amd64.tar.gz"
-      sha256 '0ecc95f0ca4c189056b73c1107961b22c2de1c264b44456956a81e640d4e95a0'
+      sha256 HASHES['darwin/amd64']
     end
   end
 
   on_linux do
     if Hardware::CPU.arm?
       url "#{prefix}-linux-arm64.tar.gz"
-      sha256 'c2c7f4031727fc1211d1e9e03c9bed0d98feeb5c4d23d6bc4736f4601ad9d0e5'
+      sha256 HASHES['linux/arm64']
     else
       url "#{prefix}-linux-amd64.tar.gz"
-      sha256 '0e96d228eb96140abb661c3991a7c11ad30098b5181e9b77ee017b3f12093315'
+      sha256 HASHES['linux/amd64']
     end
   end
 
